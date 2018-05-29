@@ -156,127 +156,7 @@ function Renderer(container) {
                 handleWebGLError1286();
         }
         
-        // If there is no WebGL, fall back to CSS 3D transform renderer.
-        // This will discard the image loaded so far and load the fallback image.
-        // While browser specific tests are usually frowned upon, the
-        // fallback viewer only really works with WebKit/Blink and IE 10/11
-        // (it doesn't work properly in Firefox).
-        if (!gl && ((imageType == 'multires' && image.hasOwnProperty('fallbackPath')) ||
-            imageType == 'cubemap') &&
-            ('WebkitAppearance' in document.documentElement.style ||
-            navigator.userAgent.match(/Trident.*rv[ :]*11\./) ||
-            navigator.appVersion.indexOf('MSIE 10') !== -1)) {
-            // Remove old world if it exists
-            if (world) {
-                container.removeChild(world);
-            }
-            
-            // Initialize renderer
-            world = document.createElement('div');
-            world.className = 'pnlm-world';
-            
-            // Add images
-            var path;
-            if (image.basePath) {
-                path = image.basePath + image.fallbackPath;
-            } else {
-                path = image.fallbackPath;
-            }
-            var sides = ['f', 'r', 'b', 'l', 'u', 'd'];
-            var loaded = 0;
-            var onLoad = function() {
-                // Draw image on canvas
-                var faceCanvas = document.createElement('canvas');
-                faceCanvas.className = 'pnlm-face pnlm-' + sides[this.side] + 'face';
-                world.appendChild(faceCanvas);
-                var faceContext = faceCanvas.getContext('2d');
-                faceCanvas.style.width = this.width + 4 + 'px';
-                faceCanvas.style.height = this.height + 4 + 'px';
-                faceCanvas.width = this.width + 4;
-                faceCanvas.height = this.height + 4;
-                faceContext.drawImage(this, 2, 2);
-                var imgData = faceContext.getImageData(0, 0, faceCanvas.width, faceCanvas.height);
-                var data = imgData.data;
-                
-                // Duplicate edge pixels
-                var i;
-                var j;
-                for (i = 2; i < faceCanvas.width - 2; i++) {
-                    for (j = 0; j < 4; j++) {
-                        data[(i + faceCanvas.width) * 4 + j] = data[(i + faceCanvas.width * 2) * 4 + j];
-                        data[(i + faceCanvas.width * (faceCanvas.height - 2)) * 4 + j] = data[(i + faceCanvas.width * (faceCanvas.height - 3)) * 4 + j];
-                    }
-                }
-                for (i = 2; i < faceCanvas.height - 2; i++) {
-                    for (j = 0; j < 4; j++) {
-                        data[(i * faceCanvas.width + 1) * 4 + j] = data[(i * faceCanvas.width + 2) * 4 + j];
-                        data[((i + 1) * faceCanvas.width - 2) * 4 + j] = data[((i + 1) * faceCanvas.width - 3) * 4 + j];
-                    }
-                }
-                for (j = 0; j < 4; j++) {
-                    data[(faceCanvas.width + 1) * 4 + j] = data[(faceCanvas.width * 2 + 2) * 4 + j];
-                    data[(faceCanvas.width * 2 - 2) * 4 + j] = data[(faceCanvas.width * 3 - 3) * 4 + j];
-                    data[(faceCanvas.width * (faceCanvas.height - 2) + 1) * 4 + j] = data[(faceCanvas.width * (faceCanvas.height - 3) + 2) * 4 + j];
-                    data[(faceCanvas.width * (faceCanvas.height - 1) - 2) * 4 + j] = data[(faceCanvas.width * (faceCanvas.height - 2) - 3) * 4 + j];
-                }
-                for (i = 1; i < faceCanvas.width - 1; i++) {
-                    for (j = 0; j < 4; j++) {
-                        data[i * 4 + j] = data[(i + faceCanvas.width) * 4 + j];
-                        data[(i + faceCanvas.width * (faceCanvas.height - 1)) * 4 + j] = data[(i + faceCanvas.width * (faceCanvas.height - 2)) * 4 + j];
-                    }
-                }
-                for (i = 1; i < faceCanvas.height - 1; i++) {
-                    for (j = 0; j < 4; j++) {
-                        data[(i * faceCanvas.width) * 4 + j] = data[(i * faceCanvas.width + 1) * 4 + j];
-                        data[((i + 1) * faceCanvas.width - 1) * 4 + j] = data[((i + 1) * faceCanvas.width - 2) * 4 + j];
-                    }
-                }
-                for (j = 0; j < 4; j++) {
-                    data[j] = data[(faceCanvas.width + 1) * 4 + j];
-                    data[(faceCanvas.width - 1) * 4 + j] = data[(faceCanvas.width * 2 - 2) * 4 + j];
-                    data[(faceCanvas.width * (faceCanvas.height - 1)) * 4 + j] = data[(faceCanvas.width * (faceCanvas.height - 2) + 1) * 4 + j];
-                    data[(faceCanvas.width * faceCanvas.height - 1) * 4 + j] = data[(faceCanvas.width * (faceCanvas.height - 1) - 2) * 4 + j];
-                }
-                
-                // Draw image width duplicated edge pixels on canvas
-                faceContext.putImageData(imgData, 0, 0);
-                
-                incLoaded.call(this);
-            };
-            var incLoaded = function() {
-                if (this.width > 0) {
-                    if (fallbackImgSize === undefined)
-                        fallbackImgSize = this.width;
-                    if (fallbackImgSize != this.width)
-                        console.log('Fallback faces have inconsistent widths: ' + fallbackImgSize + ' vs. ' + this.width);
-                } else
-                    faceMissing = true;
-                loaded++;
-                if (loaded == 6) {
-                    fallbackImgSize = this.width;
-                    container.appendChild(world);
-                    callback();
-                }
-            };
-            faceMissing = false;
-            for (s = 0; s < 6; s++) {
-                var faceImg = new Image();
-                faceImg.crossOrigin = globalParams.crossOrigin ? globalParams.crossOrigin : 'anonymous';
-                faceImg.side = s;
-                faceImg.onload = onLoad;
-                faceImg.onerror = incLoaded; // ignore missing face to support partial fallback image
-                if (imageType == 'multires') {
-                    faceImg.src = encodeURI(path.replace('%s', sides[s]) + '.' + image.extension);
-                } else {
-                    faceImg.src = encodeURI(image[s].src);
-                }
-            }
-            fillMissingFaces(fallbackImgSize);
-            return;
-        } else if (!gl) {
-            console.log('Error: no WebGL support detected!');
-            throw {type: 'no webgl'};
-        }
+
         if (imageType == 'cubemap')
             fillMissingFaces(cubeImgWidth);
         if (image.basePath) {
@@ -1138,7 +1018,9 @@ function Renderer(container) {
             if (cacheTop)
                 textureImageCache[--cacheTop].loadTexture(src, texture, callback);
             else
+            {   
                 pendingTextureRequests.push(new PendingTextureRequest(node, src, texture, callback));
+            }
             return texture;
         };
     })();
