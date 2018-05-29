@@ -82,6 +82,7 @@ function parseURLParameters() {
 
             // Create viewer
             configFromURL.escapeHTML = true;
+            console.log('configFromURL:',configFromURL)
             viewer = pannellum.viewer('container', configFromURL);
         };
         request.open('GET', configFromURL.config);

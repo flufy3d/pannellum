@@ -51,7 +51,6 @@ var config,
     fullscreenActive = false,
     loaded,
     error = false,
-    isTimedOut = false,
     listenersAdded = false,
     panoImage,
     prevTime,
@@ -507,7 +506,7 @@ function onImageLoad() {
 
     renderInit();
     setHfov(config.hfov); // possibly adapt hfov after configuration and canvas is complete; prevents empty space on top or bottom by zomming out too much
-    setTimeout(function(){isTimedOut = true;}, 500);
+
 }
 
 /**

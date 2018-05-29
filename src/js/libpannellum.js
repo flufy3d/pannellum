@@ -1384,8 +1384,8 @@ var fragMulti = [
 ].join('');
 
 return {
-    renderer: function(container, image, imagetype, dynamic) {
-        return new Renderer(container, image, imagetype, dynamic);
+    renderer: function(container) {
+        return new Renderer(container);
     }
 };
 
