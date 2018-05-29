@@ -170,7 +170,7 @@ function Renderer(container) {
         vtmps = [];
         for (s = 0; s < 6; s++) {
             vtmps[s] = vertices.slice(s * 12, s * 12 + 12);
-            vertices = createCube();
+            //vertices = createCube();
         }
         
         // Make sure image isn't too big
