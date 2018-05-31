@@ -7,6 +7,31 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "examples/example-multires.json",
+			"settings":
+			{
+				"buffer_size": 309,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/libpannellum.js",
+			"settings":
+			{
+				"buffer_size": 50598,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/pannellum.js",
+			"settings":
+			{
+				"buffer_size": 100585,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -40,10 +65,24 @@
 	},
 	"expanded_folders":
 	[
-		"/D/Github/pannellum"
+		"/D/Github/pannellum",
+		"/D/Github/pannellum/examples",
+		"/D/Github/pannellum/examples/multires",
+		"/D/Github/pannellum/src",
+		"/D/Github/pannellum/src/css",
+		"/D/Github/pannellum/src/css/img",
+		"/D/Github/pannellum/src/js",
+		"/D/Github/pannellum/src/standalone"
 	],
 	"file_history":
 	[
+		"/D/Github/PanoramaViewer/Assets/Scripts/PanoramaRender.cs",
+		"/D/Github/pannellum/src/js/pannellum.js",
+		"/D/Github/pannellum/examples/example-multires.htm",
+		"/D/Github/pannellum/src/standalone/pannellum.htm",
+		"/D/Github/pannellum/src/standalone/standalone.js",
+		"/D/Github/pannellum/src/standalone/standalone.css",
+		"/D/Github/pannellum/pannellum.sublime-project",
 		"/C/Users/JamesChen/Documents/GitHub/pannellum/src/standalone/pannellum.htm",
 		"/C/Users/JamesChen/Documents/GitHub/pannellum/src/standalone/standalone.css",
 		"/C/Users/JamesChen/Documents/GitHub/pannellum/src/standalone/standalone.js",
@@ -51,13 +90,14 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 104.0,
 		"where_history":
 		[
+			"D:\\Github\\pannellum"
 		]
 	},
 	"find_state":
@@ -65,6 +105,85 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"testMultiresNode",
+			"vtmps",
+			"cubeVertBuf",
+			"u_perspMatrix",
+			"processNextTile",
+			"createCube(",
+			"createCube",
+			"invTileResolution",
+			"experimental-webgl",
+			"fillMissingFaces",
+			"pose",
+			"settimeout",
+			"dynamic",
+			"processNextTile",
+			"console",
+			"_crossOrigin",
+			"loadTexture(",
+			"deletetexture",
+			"loadTexture(",
+			"loadTexture",
+			"cache",
+			"cacheTop",
+			"loadTexture",
+			"PendingTextureRequest",
+			"loadTexture",
+			"deleteTexture",
+			"processLoadedTexture",
+			"bindTexture",
+			"texture",
+			"processLoadedTexture",
+			"loadTexture",
+			"program =",
+			"program",
+			"gl =",
+			"gl",
+			"multiresDraw",
+			"renderInitCallback",
+			"panoImage",
+			".init(",
+			".init",
+			"renderContainer",
+			"pnlm-render-container",
+			"createCube",
+			"multiresDraw",
+			"render",
+			"render(",
+			"fragCube",
+			"fragEquiCubeBase",
+			"fragmentSrc",
+			"fragEquirectangular",
+			"init",
+			"imagetype",
+			"Renderer(",
+			"renderHotSpot",
+			"request",
+			"render",
+			"render(",
+			"render()",
+			"animateInit",
+			"setHfov",
+			"isTimedOut",
+			"onImageLoad",
+			"renderInit",
+			"process",
+			"autoLoad",
+			"processOptions",
+			"init()",
+			"onImageLoad",
+			"init",
+			"multires",
+			"container",
+			".container",
+			"#container",
+			"renderer",
+			"libpannellum",
+			"config",
+			"parseURLParameters",
+			"viewer",
+			"anError"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -82,14 +201,105 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "examples/example-multires.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 309,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								197,
+								206
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/js/libpannellum.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 50598,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								19571,
+								19571
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7828.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/js/pannellum.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 100585,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13696,
+								13696
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 6098.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -126,7 +336,7 @@
 	"project": "pannellum.sublime-project",
 	"replace":
 	{
-		"height": 0.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -146,7 +356,7 @@
 		[
 			[
 				"",
-				"D:\\Github\\pannellum\\pannellum.sublime-workspace"
+				"D:\\Github\\pannellum\\pannellum.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -168,7 +378,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 313.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
